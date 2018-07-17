@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="10dp"
+        android:background="@color/main">
+
+        <Button
+            android:id="@+id/backToEdition"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@android:color/transparent"
+            android:singleLine="true"
+            android:text="Cancelar"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:text="" />
+
+        <ImageButton
+            android:id="@+id/doneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:background="@android:color/transparent"
+            android:src="@drawable/check"
+            android:gravity="center"
+            android:padding="@dimen/filter_bar_padding"
+            android:singleLine="true"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/gray2"
+        android:id="@+id/filtersBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_vertical">
+
+        <Button
+            android:id="@+id/BWMode"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/black_white"
+            android:singleLine="true"
+            android:text="Blanco y Negro"
+            android:textAllCaps="false"
+            android:padding="@dimen/filter_bar_padding"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/grayMode"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/gray_scale"
+            android:singleLine="true"
+            android:text="Grises"
+            android:textAllCaps="false"
+            android:padding="@dimen/filter_bar_padding"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/magicColor"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/magic_color"
+            android:singleLine="true"
+            android:text="Realce"
+            android:textAllCaps="false"
+            android:padding="@dimen/filter_bar_padding"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/original"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:drawableTop="@drawable/original"
+            android:text="Original"
+            android:singleLine="true"
+            android:textAllCaps="false"
+            android:padding="@dimen/filter_bar_padding"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topBar"
+        android:layout_above="@id/filtersBar"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/scanPadding">
+
+        <ImageView
+            android:id="@+id/scannedImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/scanPadding" />
+    </FrameLayout>
+
+
+</RelativeLayout>
