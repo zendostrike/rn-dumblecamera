@@ -62,19 +62,24 @@ public class DumbleCameraModule extends ReactContextBaseJavaModule implements Ac
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
-        Bitmap bitmap = null;
-        try {
-            bitmap = MediaStore.Images.Media.getBitmap(getReactApplicationContext().getContentResolver(), uri);;
+        Log.i("ON ACTIVITY RESULT..", "ENTRANDO");
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Log.i("ON ACTIVITY RESULT..", "ENTRANDO ACITIVITYTYTYT REYSKTLTT");
+            Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
+            Log.i("URIIIrii", uri.toString());
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getReactApplicationContext().getContentResolver(), uri);;
 
-            scannedResult = Arguments.createMap();
-            scannedResult.putString ("uri", uri.toString());
+                scannedResult = Arguments.createMap();
+                scannedResult.putString ("uri", uri.toString());
 
 
-            emitMessageToRN(getReactApplicationContext(), SCANNED_RESULT, scannedResult);
-            // scannedImageView.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
+                emitMessageToRN(getReactApplicationContext(), SCANNED_RESULT, scannedResult);
+                // scannedImageView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

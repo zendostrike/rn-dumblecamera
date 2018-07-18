@@ -3,6 +3,7 @@ package com.scanlibrary;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
@@ -12,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.transition.TransitionManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +50,7 @@ public class ScanFragment extends Fragment {
     private Button rotateButton;
     private Button filtersButton;
     private Button backToCamera;
+    private Button nextButton;
     private boolean polygonVisible;
 
     @Override
@@ -80,6 +83,7 @@ public class ScanFragment extends Fragment {
                 }
             }
         });
+        nextButton = (Button) view.findViewById(R.id.next);
         backToCamera = (Button) view.findViewById(R.id.backToCamera);
         confirmContainer = (ViewGroup) view.findViewById(R.id.confirmBar);
         scanButton = (Button) confirmContainer.findViewById(R.id.scanButton);
@@ -95,6 +99,7 @@ public class ScanFragment extends Fragment {
         cropButton.setOnClickListener(new CropButtonClickListener());
         rotateButton.setOnClickListener(new RotateButtonClickListener());
         backToCamera.setOnClickListener(new BackToCameraClickListener());
+        nextButton.setOnClickListener(new NextButtonClickListener());
     }
 
     private class FiltersButtonClickListener implements View.OnClickListener {
@@ -110,6 +115,40 @@ public class ScanFragment extends Fragment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                }
+            });
+        }
+    }
+    private class NextButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            showProgressDialog(getResources().getString(R.string.loading));
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                try {
+                    Log.i("XD", "MAMAMAMAHUUEVO");
+                    Intent data = new Intent();
+                    Bitmap bitmap = original;
+                    Uri uri = Utils.getUri(getActivity(), bitmap);
+                    data.putExtra(ScanConstants.SCANNED_RESULT, uri);
+                    Log.i("XD", "MAMAMAMAHUUEVO22");
+                    getActivity().setResult(Activity.RESULT_OK, data);
+                    original.recycle();
+                    System.gc();
+                    Log.i("XD", "MAMAMAMAHUUEVO3333");
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            dismissDialog();
+                            getActivity().finish();
+                        }
+                    });
+                    Log.i("XD", "MAMAMAMAHUUEVO4444");
+                } catch (Exception e) {
+                    Log.i("XD", e.getMessage());
+                    e.printStackTrace();
+                }
                 }
             });
         }
